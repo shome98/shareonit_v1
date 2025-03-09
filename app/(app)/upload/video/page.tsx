@@ -20,10 +20,9 @@ function VideoUpload() {
 
         if (file.size > MAX_FILE_SIZE) {
             //TODO: add notification
-            alert("File size too large")
+            alert("😠File size too large");
             return;
         }
-
         setIsUploading(true)
         const formData = new FormData();
         formData.append("file", file);
@@ -33,15 +32,14 @@ function VideoUpload() {
 
         try {
             const response = await axios.post("/api/upload/video", formData);
+            if (response.status === 200) router.push("/");
             // check for 200 response
-            router.push("/")
         } catch (error) {
             console.log(error)
             // notification for failure
         } finally{
             setIsUploading(false)
         }
-
     }
 
 
